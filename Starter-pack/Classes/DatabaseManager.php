@@ -29,6 +29,7 @@ class DatabaseManager
             $dsn = "mysql:host={$this->host};port=8889;dbname={$this->dbname}";
             $this->connection = new PDO($dsn, $this->user, $this->password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "succes";
          }
         catch (PDOException $exception){
             echo "message ", $exception->getMessage();
