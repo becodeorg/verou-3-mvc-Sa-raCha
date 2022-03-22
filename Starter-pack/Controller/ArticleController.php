@@ -4,6 +4,14 @@ declare(strict_types = 1);
 
 class ArticleController
 {
+    // TODO: prepare the database connection
+    private DatabaseManager $databaseManager;
+
+    public function __construct(DatabaseManager $databaseManager)
+    {
+        $this->databaseManager = $databaseManager;
+    }
+
     public function index()
     {
         // Load all required data
@@ -16,10 +24,12 @@ class ArticleController
     // Note: this function can also be used in a repository - the choice is yours
     private function getArticles()
     {
-        // TODO: prepare the database connection
-        // Note: you might want to use a re-usable databaseManager class - the choice is yours
-        // TODO: fetch all articles as $rawArticles (as a simple array)
-        $rawArticles = [];
+        $sql = "SELECT * FROM articles";
+        $statement = $this->databaseManager->connection->prepare($sql);
+        $statement->execute();
+        //TODO: fetch all articles as $rawArticles (as a simple array)
+        $result =  $statement->fetchAll(PDO::FETCH_ASSOC);
+        $rawArticles = $result;
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
