@@ -43,5 +43,12 @@ class ArticleController
     public function show()
     {
         // TODO: this can be used for a detail page
+        $sql = "SELECT * FROM articles WHERE id ={$_GET['id']}";
+        $statement = $this->databaseManager->connection->prepare($sql);
+        $statement->execute();
+        $result =  $statement->fetch();
+        $article = new Article($result['id'], $result['title'], $result['description'], $result['publish date']);
+        
+        require 'View/articles/show.php';
     }
 }

@@ -30,8 +30,11 @@ switch ($page) {
         // $articleController->index();
         (new ArticleController($databaseManager))->index();
         break;
-    case 'articles-show':
+    case 'show':
         // TODO: detail page
+        (new ArticleController($databaseManager))->show();
+        break;
+        
     case 'home':
     default:
         (new HomepageController())->index();
